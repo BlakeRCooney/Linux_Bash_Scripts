@@ -1,4 +1,4 @@
-Creation of a website script with Variables and Command line arguments
+### Creation of a website script with Variables and Command line arguments ###
 ## When entering the name of this script websetup.sh (or whatever you would like to name it, when entering in the command line you will need to add the URL after the command and the Artifact name
 
 ## Example : ./websetup.sh https://www.tooplate.com/zip-templates/2090_kinetic.zip 2090_kinetic 
