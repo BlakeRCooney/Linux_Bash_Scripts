@@ -1,0 +1,12 @@
+#!/usr/bin/python3
+import os
+
+path="/opt/python_scripts/"
+if os.path.isdir(path):
+   print"It is a directory."
+elif os.path.isfile(path):
+   print"It is a file."
+else:
+   print"File or directory does not exist"
+
+# Will be adding another script to allow user input to find out the type of input
