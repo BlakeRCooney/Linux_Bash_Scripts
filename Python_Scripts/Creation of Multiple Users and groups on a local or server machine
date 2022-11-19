@@ -1,0 +1,58 @@
+### Creation of Multiple Users and groups on a local or server machine ###
+
+#!/usr/bin/python3
+
+import os
+
+username = input("Input a user name you would like to create: ")
+print("Adding User")
+print(username)
+print("#########################################################")
+
+# Loop to add users from the user list
+for user in username:
+   exitcode = os.system("id {}".format(username) )
+   if exitcode != 0:
+   print("User {} does not exist. Adding user now".format(username))
+   print("#########################################################")
+   print()
+     os.system("useradd {}".format(username))
+   else:
+     print("The user already exists, skipping adding this user.")
+     print("#########################################################")
+     print()
+
+# Condition to check if a Group exists or not, and will add the Group if it does not exist
+group = input("Enter Group name you want to add: ")
+exitcode = os.system("grep {} /etc/group".format(group))
+if exitcode != 0:
+   print("Group name {} does not exist, adding the group now.".format(group))
+   print("#########################################################")
+   print()
+   os.system("groupadd {}".format(group))
+else:
+   print("Group already exists, skipping adding the group")
+   print("#########################################################")
+   print()
+
+for user in username:
+   print("Adding user {} in the {} group".format(username, group))
+   print("#########################################################")
+   print()
+   os.system("usermod -G {} {}".format(group, username))
+
+print("Adding Directory")
+print("#########################################################")
+print()
+
+if os.path.isdir("/opt/python_scripts"):
+   print("The Directory already exists, skipping the creation of the Directory")
+else:
+   os.mkdir("/opt/python_scripts")
+
+print("Assiging permissions and ownership of the Directory")
+print("#########################################################")
+print()
+os.system("chown :{} /opt/python_scripts".format(group))
+
+os.system("chmod 770 /opt/python_scripts")
